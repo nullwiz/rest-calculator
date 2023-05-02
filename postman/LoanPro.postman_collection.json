@@ -1,0 +1,682 @@
+{
+	"info": {
+		"_postman_id": "17405cbb-06bb-4453-b39c-2471b5716320",
+		"name": "restcalculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15218807"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var xsrfCookie = postman.getResponseCookie(\"csrf_access_token\");\r",
+									"postman.setEnvironmentVariable(\"X-CSRF-TOKEN\",xsrfCookie.value);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MTAxMjg1NCwianRpIjoiYTdjOWI3NDYtZTYzYi00YzhjLTkzY2MtYWM3ZjJmNWE4NjQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImU0Y2JkM2E5LThiMTYtNDc2Yi1hZTNlLTMxMDY5MGY3ODNiYSIsIm5iZiI6MTY4MTAxMjg1NCwiZXhwIjoxNjgxMDEzNzU0LCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMkBhc2QuYXMiLCJpZCI6ImU0Y2JkM2E5LThiMTYtNDc2Yi1hZTNlLTMxMDY5MGY3ODNiYSJ9.JJnevsnruZ2JVIZy4lrB6flAsEeTzRep1mTPz9qyjHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"defaultadmin@admin.as\",\r\n    \"password\" : \"adminpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var xsrfCookie = postman.getResponseCookie(\"csrf_access_token\");\r",
+									"postman.setEnvironmentVariable(\"X-CSRF-TOKEN\",xsrfCookie.value);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4MTAxMjg1NCwianRpIjoiYTdjOWI3NDYtZTYzYi00YzhjLTkzY2MtYWM3ZjJmNWE4NjQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImU0Y2JkM2E5LThiMTYtNDc2Yi1hZTNlLTMxMDY5MGY3ODNiYSIsIm5iZiI6MTY4MTAxMjg1NCwiZXhwIjoxNjgxMDEzNzU0LCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluMkBhc2QuYXMiLCJpZCI6ImU0Y2JkM2E5LThiMTYtNDc2Yi1hZTNlLTMxMDY5MGY3ODNiYSJ9.JJnevsnruZ2JVIZy4lrB6flAsEeTzRep1mTPz9qyjHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"defaultclient@client.as\",\r\n    \"password\" : \"Test1234!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin1@asd.as\",\r\n    \"password\" : \"adminpass\",\r\n    \"admin_password\" : \"restcalculatortest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/admin",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Users (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Users (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/users/3245efaf-76e0-4d03-ad4b-4d590cef9ff0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"3245efaf-76e0-4d03-ad4b-4d590cef9ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post User (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"robe31r1111212ti2413to@asd.com\",\r\n    \"balance\" : 20.0,\r\n    \"role\" : \"client\",\r\n    \"password\" : \"non_hashed_pw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User (Admin)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"robertito@asd.com\",\r\n    \"password\" : \"pepito\",\r\n    \"role\" : \"admin\", \r\n    \"balance\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users/5e192f80-5d99-4ec3-a9bc-685b65bbb43e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"5e192f80-5d99-4ec3-a9bc-685b65bbb43e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Records",
+			"item": [
+				{
+					"name": "Get Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/records?page_size=10&page=3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Records Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/records?page_size=3&page=2&fields=id,date,user_balance",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "fields",
+									"value": "id,date,user_balance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Record",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/records/b829281d-52ca-45c7-9332-3cfa72ea87fa",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records",
+								"b829281d-52ca-45c7-9332-3cfa72ea87fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Record (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/records/cc1405c6-1e0f-450c-b756-6ce78f1c1e0b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records",
+								"cc1405c6-1e0f-450c-b756-6ce78f1c1e0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Record (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 4.0,\r\n    \"date\": \"2023-04-11T19:29:31.805463\",\r\n    \"operation_id\": \"572c1531-993b-49ea-90b4-8dbf70953212\",\r\n    \"operation_response\": 3.0,\r\n    \"user_balance\": 1000.0,\r\n    \"user_id\": \"f889b10e-e71e-431f-9668-08560136bbac\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/records",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Record (Admin)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"robertito@asd.com\",\r\n    \"password\" : \"pepito\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/records/recordId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"records",
+								"recordId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operations",
+			"item": [
+				{
+					"name": "Get Operations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/operations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Operations filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/operations?fields=id&page_size=10type=addition",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id"
+								},
+								{
+									"key": "page_size",
+									"value": "10type=addition"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Operations filtered - Invalid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/operations?page_size=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Operation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/operations/operationId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations",
+								"operationId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Operations (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"robertito@asd.com\",\r\n    \"password\" : \"pepito\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/operations/operationId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations",
+								"operationId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Operation (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{X-CSRF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"random_string\",\r\n    \"cost\" : -20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/operations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Operation (Admin)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"addition\",\r\n    \"cost\" : -20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/operations/operationId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations",
+								"operationId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Process Operation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "{{X-CSRF-TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\" : \"addition\",\r\n    \"arguments\" : [1,1]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/process_operation",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"process_operation"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "xsrf-token",
+			"value": "a"
+		}
+	]
+}

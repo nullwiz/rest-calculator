@@ -1,0 +1,68 @@
+org: nullwiz
+app: restcalculator
+service: restcalculator
+
+frameworkVersion: '3'
+
+custom:
+  wsgi:
+    app: wsgi.app
+  pythonRequirements:
+    useDownloadCache: false
+    useStaticCache: false
+    zip: true
+    slim: true
+    noDeploy:
+      - docutils
+      - jmespath
+      - pip
+      - python-dateutil
+      - setuptools
+      - six
+      - wheel
+    separateRequirements: true
+    fileName: requirements.txt
+    workerRequirements: requirements_worker.txt
+provider:
+  name: aws
+  runtime: python3.9
+  vpc:
+    securityGroupIds:
+      - {your security group id} 
+    subnetIds:
+      - {yourSubnetId}
+      - {yourSubnetId}
+  environment:
+    CONFIG_TYPE: ${env:CONFIG_TYPE}
+    AWS_PGSQL_PATH: ${env:AWS_PGSQL_PATH}
+    JWT_SECRET_KEY: ${env:JWT_SECRET_KEY}
+    ADMIN_PASSWORD: ${env:ADMIN_PASSWORD}
+    FRONTEND_URL: ${env:FRONTEND_URL}
+    RANDOM_STRING_API_KEY: ${env:RANDOM_STRING_API_KEY}
+
+functions:
+  api:
+    timeout: 200
+    handler: wsgi_handler.handler
+    events:
+      - httpApi: '*'
+  worker:
+    handler: worker.lambda_handler.lambda_handler
+    events:
+      - sqs:
+          arn:
+          Fn::GetAtt:
+            - opworker
+            - Arn
+resources:
+  Resources:
+    opworker:
+      Type: AWS::SQS::Queue
+
+scripts:
+  hooks:
+    'before:package:createDeploymentArtifacts': 'node patch-plugin.js'
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+  - serverless-plugin-scripts 

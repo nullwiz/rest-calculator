@@ -1,0 +1,66 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - localstack
+      - redis
+    links:
+      - postgres
+      - redis
+    environment:
+      - CONFIG_TYPE=development
+      - API_HOST=app
+      - PYTHONDONTWRITEBYTECODE=1
+      - DATABASE_URI=postgresql://postgres:password@postgres:5432/postgres
+      - LOCALSTACK_HOST=localstack
+      - REDIS_HOST=redisGG
+    volumes:
+      - ./restcalculator:/restcalculator
+      - ./tests:/tests
+    ports:
+      - "8080:8080"
+    networks:
+      - shared
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    networks:
+      - shared
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=s3,sqs
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+      - "8055:8080"
+    volumes:
+      - "./.localstack:/tmp/localstack"
+    networks:
+      - shared
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - shared
+  redisinsight:
+    image: "redislabs/redisinsight:latest"
+    ports:
+      - "8001:8001"
+    networks:
+      - shared
+
+networks:
+  shared:
+    driver: bridge 
